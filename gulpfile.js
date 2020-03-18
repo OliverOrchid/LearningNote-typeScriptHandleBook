@@ -1,4 +1,26 @@
-//##1
+/*
+
+Q:什么是gulpfile.js文件?
+
+A gulpfile is a file in your project directory titled gulpfile.js (or capitalized as 
+Gulpfile.js, like Makefile), that automatically loads when you run the gulp command. 
+
+Within this file, you'll often see gulp APIs, like src(), dest(), series(), or parallel() 
+but any vanilla JavaScript or Node modules can be used. Any exported functions will be registered into gulp's task system.
+
+
+Q:何为 "bundle" ?
+
+它源自Browerify, 具体参考根目录 README.md
+
+
+*/
+
+
+
+
+////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 
 // var gulp = require("gulp");
 // var ts = require("gulp-typescript");
@@ -98,7 +120,6 @@
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
 
 
 var gulp = require("gulp");
@@ -122,8 +143,11 @@ gulp.task("copy-html",
 );
 
 
-gulp.task('default',
-    gulp.series(gulp.parallel('copy-html'),
+gulp.task(
+    'default',
+    
+    gulp.series(
+        gulp.parallel('copy-html'),
         function(){
             return browserify({
                     basedir:'.',
@@ -132,13 +156,16 @@ gulp.task('default',
                     cache:{},  
                     packageCache:{},
                 }).plugin(tsify)
-                .boundle().pipe(source('boundle.js'))
+                  .boundle()
+                        .pipe(source('boundle.js'))
                         .pipe(buffer())
                         .pipe(sourcemaps.init({loadMaps:true}))
                         .pipe(uglify())
                         .pipe(sourcemaps.write('./'))
                         .pipe(gulp.dest("dist"));
-        }
-    )
-);
+                                                                        }
+                                                                            )
+                                                                              );
 
+
+//THE END!!!                                                                            
